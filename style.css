@@ -36,7 +36,7 @@ a{
 
 /* second part */
 .text2{
-    background-color: rgb(214, 214, 214);
+    background-color: #4d4d4d;
     display: flex;
     flex-direction:column;
     min-height: 400px;
@@ -54,6 +54,7 @@ a{
 }
 .t2 b{
     font-size: 60px;
+    color: white;
 }
 .t4{
     background-color: black;
@@ -69,7 +70,8 @@ a{
     align-content: center;
     align-items: center;
     min-height: 300px;
-    background-color: black;
+    background-color:#4d4d4d;
+    flex-wrap: wrap;
 }
 .div1{
     width: 300px;
@@ -84,7 +86,7 @@ a{
     border: 2px solid black;
 }
 .div1:hover{
-    border: 2px solid white;
+    border: 2px solid black;
     box-shadow: 1px 1px 10px white, 0 0 10px white, 0 0 10px white;
 }
 .span1{
@@ -135,3 +137,81 @@ a{
     border: 2px solid black;
     box-shadow: 1px 1px 5px black, 0 0 5px black, 0 0 5px black;
 }
+
+
+.pro{
+    display: flex;
+    justify-content: space-evenly;
+}
+#about{
+
+    width: 100%;
+    font-size: larger ;
+    min-height: 300px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+/* start of footer */
+
+.footer{
+    background-color: #4d4d4d;
+}
+.input input{
+    padding: 10px;
+    width: 200px;
+}
+.type{
+    display: flex;
+    justify-content: space-between
+    
+}
+.total{
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+.in{
+    display: flex;
+    flex-direction: column;
+    justify-content:space-around;
+    height: 130px;
+}
+.in h4,ins{
+    color:black;
+    font-size: 14px;
+}
+.subscribe{
+    padding: 10px;
+    color: black;
+    border: 1px solid black;
+    display: inline-block;
+}
+.out{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+hr{
+    opacity: 0.6;
+}
+.ed{
+    display: flex;
+    justify-content: space-between;
+}
+.end{
+    display: flex;
+    width: 500px;
+    justify-content: space-evenly;    
+
+}
+.end a{
+    
+    text-decoration: none;
+    color: black;
+}
+/* 
+end of footer */
