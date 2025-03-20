@@ -114,6 +114,43 @@
             </div>
         </form>
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelector("form").addEventListener("submit", async function (event) {
+                event.preventDefault(); // Prevent default form submission
+    
+                const email = document.getElementById("email").value;
+                const password = document.getElementById("password").value;
+    
+                try {
+                    const response = await fetch("http://localhost:5000/shopkeeper/login", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ email, password })
+                    });
+    
+                    const data = await response.json();
+    
+                    if (response.ok) {
+                        alert("Login successful! Redirecting...");
+                        
+                        // ✅ Store token & shop name in localStorage
+                        localStorage.setItem("token", data.token);
+                        localStorage.setItem("shopName", data.shopkeeper.shopName);
+    
+                        window.location.href = "sellerprofile.html";
+                    } else {
+                        alert("Invalid credentials! Please try again.");
+                    }
+    
+                } catch (error) {
+                    console.error("Error during login:", error);
+                    alert("An error occurred. Check the console.");
+                }
+            });
+        });
+    </script>
+    
 </body>
 </html>
     

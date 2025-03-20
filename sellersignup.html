@@ -85,39 +85,40 @@
           text-align: center;
         }
       </style>
-      
-      <div class="login-form">
+      <form id="seller-signup-form" class="login-form" enctype="multipart/form-data">
         <h2>Sign Up As a Seller</h2>
+    
         <label for="name">Name</label>
-        <input type="text" id="name" placeholder="Enter your name">
-      
+        <input type="text" id="name" name="name" placeholder="Enter your name" required>
+    
+        <label for="shopName">Shop Name</label>
+        <input type="text" id="shopName" name="shopName" placeholder="Enter your Shop name" required>
+    
         <label for="email">Email</label>
-        <input type="email" id="email" placeholder="Enter your email">
-      
+        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+    
         <label for="password">Password</label>
         <div class="password-container">
-          <input type="password" id="password" placeholder="Enter your password">
-          <button type="button" onclick="togglePassword()">SHOW</button>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            <button type="button" onclick="togglePassword()">SHOW</button>
         </div>
-      
-        <label for="gst">GST Number</label>
-        <input type="text" id="gst" placeholder="Enter your GST number">
-      
-        <label for="pan">PAN Number</label>
-        <input type="text" id="pan" placeholder="Enter your PAN number">
-      
-        <label for="aadhar">Aadhar Number</label>
-        <input type="text" id="aadhar" placeholder="Enter your Aadhar number">
-      
-        <label for="shop-photo">Photo of the Shop</label>
-        <input type="file" id="shop-photo" accept="image/*">
-      
-        <a href="#">Forgot your password?</a>
-        <a href="index.html"><button type="submit">SIGN IN</button></a>
-      
+    
+        <label for="gstNumber">GST Number</label>
+        <input type="text" id="gstNumber" name="gstNumber" placeholder="Enter your GST number" required>
+    
+        <label for="panNumber">PAN Number</label>
+        <input type="text" id="panNumber" name="panNumber" placeholder="Enter your PAN number" required>
+    
+        <label for="aadharNumber">Aadhar Number</label>
+        <input type="text" id="aadharNumber" name="aadharNumber" placeholder="Enter your Aadhar number" required>
+    
+        <label for="shopLicense">Photo of the Shop</label>
+        <input type="file" id="shopLicense" name="shopLicense" required>
+    
+        <button type="submit">Sign Up</button>
         <hr>
-      </div>
-      
+    </form>
+    
       <script>
         function togglePassword() {
           const passwordField = document.getElementById('password');
@@ -128,5 +129,65 @@
           }
         }
       </script>
+      
+      <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.getElementById("seller-signup-form");
+    
+            if (!form) {
+                console.error("❌ Form not found! Check if the ID matches in HTML.");
+                return;
+            }
+    
+            form.addEventListener("submit", async function (event) {
+                event.preventDefault();
+    
+                const formData = new FormData();
+                formData.append("name", document.getElementById("name").value.trim());
+                formData.append("shopName", document.getElementById("shopName").value.trim());
+                formData.append("email", document.getElementById("email").value.trim());
+                formData.append("password", document.getElementById("password").value.trim());
+                formData.append("gstNumber", document.getElementById("gstNumber").value.trim());
+                formData.append("panNumber", document.getElementById("panNumber").value.trim());
+                formData.append("aadharNumber", document.getElementById("aadharNumber").value.trim());
+    
+                // ✅ Handle File Upload
+                const shopLicenseFile = document.getElementById("shopLicense").files[0];
+                if (!shopLicenseFile) {
+                    alert("Please upload a shop license.");
+                    return;
+                }
+                formData.append("shopLicense", shopLicenseFile);
+    
+                console.log("🔹 Sending form data to backend...");
+    
+                try {
+                    const response = await fetch("http://localhost:5000/shopkeeper/register", {
+                        method: "POST",
+                        body: formData // ✅ Sending file as FormData
+                    });
+    
+                    const data = await response.json();
+                    console.log("🔹 Response received from backend:", data);
+    
+                    if (response.ok) {
+                        alert("✅ Signup successful! Redirecting...");
+                        window.location.href = "sellerlog.html";
+                    } else {
+                        alert("❌ Error: " + data.message);
+                    }
+    
+                } catch (error) {
+                    console.error("❌ Error during signup:", error);
+                    alert("An error occurred. Check console for details.");
+                }
+            });
+        });
+    </script>
+    
+    
+    
+  
+    
 </body>
 </html>

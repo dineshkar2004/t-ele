@@ -66,7 +66,7 @@
     </div>
 </div>
 <div class="container">
-    <h1>Seller Dashboard / Poorvika</h1>
+    <h1>Seller Dashboard / <span id="shop-name">Poorvika</span></h1>
     <div class="product-form">
         <h2>Add / Modify Product</h2>
         <form id="productForm">
@@ -162,5 +162,14 @@
 
     renderProducts();
 </script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const shopName = localStorage.getItem("shopName") || "Shop Name Not Found";
+        
+        // ✅ Replace "Poorvika" dynamically
+        document.getElementById("shop-name").textContent = shopName;
+    });
+</script>
+
 </body>
 </html>
